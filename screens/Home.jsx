@@ -3,8 +3,9 @@ import { View, Text } from "react-native";
 import { Post } from "../components/Post";
 import { useEffect, useState } from "react";
 import { FlatList, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
+import { Loading } from "../components/Loading";
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [articles, setArticles] = useState([])
 
@@ -23,16 +24,7 @@ export const HomeScreen = () => {
     }
 
     if (1 > 2) {
-        return <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            
-            <Text style={{
-                marginTop: 10
-            }}>Loading</Text>
-        </View>
+        return <Loading />
     }
 
     return (
@@ -42,7 +34,7 @@ export const HomeScreen = () => {
                 refreshControl={ <RefreshControl refreshing={isLoading} onRefresh={fetchArticles} />}
                 data={articles}
                 renderItem={({ item }) => (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('PostScreen', { id: item.id, title: item.title })}>
                         <Post
                         title={item.title}
                         createdAt={item.createdAt}

@@ -1,11 +1,5 @@
-import { View, StatusBar } from "react-native";
-import { HomeScreen } from "../screens/Home";
+import { Navigation } from "../navigation/Navigation";
 
 export default function App() {
-
-    return (
-        <View>
-            <HomeScreen />
-        </View>
-    )
+    return <Navigation />
 }
